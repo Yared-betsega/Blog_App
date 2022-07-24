@@ -1,6 +1,8 @@
 const express = require("express");
 const { User, validate } = require("../models/User");
 const bcrypt = require("bcrypt");
+const verify_token = require("../middleware/verify_token")
+
 
 const router = express.Router();
 
@@ -42,8 +44,16 @@ router.post("/", async (req, res) => {
         res.status(400).send("Cannot create user");
     }
 });
-router.put("/:id", async (req, res) => {
+router.put("/:id", verify_token, async (req, res) => {
+    if (req.user._id != req.params.id) {
+        return res.status(401).send("Access Denied");
+    }
+    const emailExists = await User.findOne({ email: req.body.email });
+    const usernameExists = await User.findOne({ username: req.body.username });
+    if (emailExists) return res.status(400).send("Email already exists");
+    if (usernameExists) return res.status(400).send("Username already exists");
     let user = await User.findOne({ _id: req.params.id });
+    if (!user) return res.status(404).send("No user found with given credentials")
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     await user.save();
