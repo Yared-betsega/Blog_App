@@ -20,3 +20,5 @@ const authorize = (roles) => [
             next(); // User is authorized to blog
         }
     ];
+
+module.exports = authorize;
