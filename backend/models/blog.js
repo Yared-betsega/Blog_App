@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi")
+const authorize = require("../middleware/authorize")
 
 const blogSchema = mongoose.Schema(
     {
@@ -28,7 +29,7 @@ const blogSchema = mongoose.Schema(
         },
     }
 );
-const Post = mongoose.model("Post", blogSchema);
+const Blog = mongoose.model("Post", blogSchema);
 
 function validateBlog(blog){
     const schema = Joi.object(
@@ -43,6 +44,6 @@ function validateBlog(blog){
 }
 
 module.exports = {
-    Post: Post,
+    Blog: Blog,
     validate: validateBlog
 }

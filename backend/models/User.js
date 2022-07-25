@@ -17,6 +17,11 @@ const userSchema = mongoose.Schema(
             min: 5,
             max: 100
         },
+        role: {
+            type: String,
+            required: true,
+            default: "user"
+        },
         password: {
             type: String,
             required: true,
@@ -46,6 +51,7 @@ function validateUser(user) {
         {
             username: Joi.string().min(3).max(50).required(),
             email: Joi.string().min(5).max(100).required().email(),
+            role: Joi.string().required(),
             password: Joi.string().min(4).max(2048).required()
         }
     );

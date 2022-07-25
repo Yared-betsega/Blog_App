@@ -17,6 +17,7 @@ router.get("/:id", async (req, res) => {
     if (!user) return res.status(404).send("User not found");
     res.send(user);
 });
+
 router.post("/", async (req, res) => {
     console.log(req.body)
     const { error } = validate(req.body);
@@ -28,6 +29,7 @@ router.post("/", async (req, res) => {
     let user = User({
         username: req.body.username,
         email: req.body.email,
+        role: req.body.role,
         password: req.body.password,
     });
     const salt = await bcrypt.genSalt(10);
