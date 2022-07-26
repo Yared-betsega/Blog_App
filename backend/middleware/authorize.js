@@ -5,7 +5,7 @@ const authorize = (roles) => [
             const token = req.header("x-auth-token");
             if (!token) return res.status(403).send("No token provided, Access denied!");
             try{
-                const verified = jwt.verify(token, proces.env["JWT_PRIVATE_KEY"]);
+                const verified = jwt.verify(token, process.env["JWT_PRIVATE_KEY"]);
                 req.user = verified;
                 next()
             }catch (e) {
@@ -13,9 +13,10 @@ const authorize = (roles) => [
             }
         },
 
-        function(req, res, next) {            
+        function(req, res, next) {       
+            console.log(req.user.name)     
             if (roles.length && !(roles === req.user.role)) {
-                return res.status(403).send("You are not authorized to blog!")
+                return res.status(401).send("You are not authorized to blog!")
             }
             next(); // User is authorized to blog
         }

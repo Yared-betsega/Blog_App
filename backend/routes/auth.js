@@ -5,6 +5,37 @@ const Joi = require("joi");
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /login:
+ *  post:
+ *   summary: Login authentication
+ *   tags:
+ *    - authentication
+ *   consumes:
+ *    - application/json
+ *   parameters:
+ *    - in: body
+ *      name: user
+ *      description: Data for authentication
+ *      schema: 
+ *        type: object
+ *        required: 
+ *          - email
+ *          - password
+ *        properties: 
+ *          email:
+ *            type: string
+ *          password:
+ *            type: string
+ *   responses:
+ *    '200':
+ *     description: successful operation
+ *    '404':
+ *     description: Invalid email or password
+ *    '400':
+ *     description: Invalid credentials
+ */
 router.post("/", async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);

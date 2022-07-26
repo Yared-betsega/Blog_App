@@ -23,6 +23,10 @@ const blogSchema = mongoose.Schema(
             required: true,
             default: Date.now
         },
+        likes: {
+            type: Number,
+            default: 0
+        },
         description: {
             type: String,
             max: 200
@@ -35,7 +39,6 @@ function validateBlog(blog){
     const schema = Joi.object(
         {
             name: Joi.string().min(2).max(50).required(),
-            author: Joi.string().hex().length(24).required(),
             category: Joi.string().required(),
             description: Joi.string().max(200)
         }
@@ -43,7 +46,5 @@ function validateBlog(blog){
     return schema.validate(blog);
 }
 
-module.exports = {
-    Blog: Blog,
-    validate: validateBlog
-}
+module.exports.Blog = Blog;
+module.exports.validate = validateBlog;
