@@ -4,7 +4,7 @@
   "description": "A node backend application for a blog app",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon ./src/app.js"
   },
   "author": "Yared Tsegaye",
   "license": "ISC",
@@ -12,13 +12,11 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "lowdb": "github:dankreiger/lowdb#chore/esm-cjs-hybrid-WITH-LIB",
     "mongoose": "^6.4.6",
-    "morgan": "^1.10.0",
-    "nanoid": "^4.0.0",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.5.0"
   }
