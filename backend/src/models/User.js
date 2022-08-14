@@ -27,6 +27,12 @@ const userSchema = mongoose.Schema(
             required: true,
             min: 4,
             max: 2048
+        },
+        avatar: {
+            type: String
+        },
+        cloudinary_id: {
+            type: String
         }
     }
 );

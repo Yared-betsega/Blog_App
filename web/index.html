@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id"
+        content="590485346971-bv6gporni9dorpvluhukg9gs4d5rqsrl.apps.googleusercontent.com">
+    <title>Document</title>
+</head>
+
+<body>
+    <div
+        style="margin: auto; margin-top: 100px; width: fit-content; border: 1px solid grey; border-radius: 10px; box-shadow: 2px 2px 2px grey; padding: 70px; background-color: rgb(249, 247, 247);">
+        <p style="font-size:large; text-align: center; font-family:'Times New Roman', Times, serif">Sign in</p>
+        <div id="g_id_onload" data-client_id="590485346971-bv6gporni9dorpvluhukg9gs4d5rqsrl.apps.googleusercontent.com"
+            data-callback="handleCredentialResponse">
+        </div>
+        <div class="g_id_signin" data-type="standard">
+        </div>
+
+    </div>
+
+    <script>
+        function handleCredentialResponse(response) {
+            console.log("Authentication started")
+            var xhttp = new XMLHttpRequest();
+            // xhttp.onreadystatechange = function () {
+            //     if (this.readyState == 4 && this.status == 200) {
+            //         document.getElementById("verify").innerHTML = this.responseText;
+            //     }
+            // }
+            xhttp.open("POST", "http://localhost:5000/api/v1/users/google", true);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            
+            xhttp.send(JSON.stringify({
+                "token": response.credential
+            }));
+            console.log("USer authentcated!")
+        }
+    </script>
+</body>
+
+</html>
